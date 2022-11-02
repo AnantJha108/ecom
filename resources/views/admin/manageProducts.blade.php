@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             @include('admin.side')
-            <div class="col mt-4 px-5">
+            <div class="col  mt-4 px-5">
                 @if (session('msg'))
                     <div class="alert bg-success text-white">
                         {{ session('msg') }}
@@ -39,22 +39,26 @@
                         <th>Action</th>
                     </tr>
                     @foreach ($products as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->prod_name}}</td>
-                        <td>{{$item->prod_description}}</td>
-                        <td>{{$item->category_id}}</td>
-                        <td>{{$item->prod_price}}</td>
-                        <td>{{$item->prod_discount_price}}</td>
-                        <td class="d-flex gap-3">
-                            <a href="{{route('products.edit',$item)}}" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i></a>
-                            <form action="{{route('products.destroy',$item)}}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button type="submit"  class="btn btn-danger btn-sm"><i class='bi bi-trash3'></i></button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->prod_name }}</td>
+                            <td>{{ $item->prod_description }}</td>
+                            <td>{{ $item->category_id }}</td>
+                            <td>{{ $item->prod_price }}</td>
+                            <td>{{ $item->prod_discount_price }}</td>
+                            <td>
+                                <div class="d-flex gap-3">
+                                    <a href="{{ route('products.edit', $item) }}" class="btn btn-info btn-sm"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                    <form action="{{ route('products.destroy', $item) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class='bi bi-trash3'></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </table>
             </div>

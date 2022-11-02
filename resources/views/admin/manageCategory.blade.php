@@ -25,13 +25,17 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->category_name }}</td>
                                     <td>{{ $item->category_description }}</td>
-                                    <td class="d-flex gap-3">
-                                        <a href="{{route('categories.edit',$item)}}" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                        <form action="{{route('categories.destroy',$item)}}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit"  class="btn btn-danger btn-sm"><i class='bi bi-trash3'></i></button>
-                                        </form>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <a href="{{ route('categories.edit', $item) }}" class="btn btn-info btn-sm"><i
+                                                    class="bi bi-pencil-square"></i></a>
+                                            <form action="{{ route('categories.destroy', $item) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class='bi bi-trash3'></i></button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <p class="m-0">{{ $item->prod_name }}</p>
                             <p><del class="text-danger fs-6">₹{{ $item->prod_price }}</del>
-                                ₹{{ $item->prod_discount_price }}</p>
+                            <p>{{ $item->getCategory->category_name}}</p>
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-sm btn-warning">Add to Cart</button>
                                 <button type="button" class="btn btn-sm btn-success">Buy now</button>
@@ -53,4 +53,5 @@
             @endforeach
         </div>
     </div>
+    @include('user.footer')
 @endsection

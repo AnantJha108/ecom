@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::paginate(20);
+        $data['categories'] = Category::all();
+        $data['products'] = Product::paginate(30);
         return view("user.home",$data);
     }
 
@@ -69,5 +71,10 @@ class HomeController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect()->route("admin.login");
+    }
+
+    public function category($cat_id){
+        $data['products'] = Product::where('category_id',$cat_id)->paginate(6);
+        return redirect()->route('homepage',$data);
     }
 }

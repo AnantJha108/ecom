@@ -19,6 +19,7 @@ Route::middleware('auth:admin')->group(function () {
 // });
 
 Route::get("/", [HomeController::class, "index"])->name("homepage");
+Route::get('/category/{cat_id}',[HomeController::class,"category"])->name("category");
 Route::match(["get", "post"], "/admin/login", [HomeController::class, "adminLogin"])->name("admin.login");
 Route::post("/admin/logout", [HomeController::class, "adminLogout"])->name("admin.logout");
 Route::match(["get", "post"], "/login", [HomeController::class, "login"])->name("login");

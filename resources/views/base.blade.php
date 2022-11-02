@@ -16,23 +16,25 @@
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                {{-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <a href="{{ route('homepage') }}"
+                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <h6 class="h5">Shop India</h6>
+                </a>
 
-                </a> --}}
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="{{route('homepage')}}" class="nav-link px-2 text-white"><i class="bi bi-house-door"></i> Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Category</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-auto">
+                    <li><a href="{{ route('homepage') }}" class="nav-link px-2 text-white"><i
+                                class="bi bi-house-door"></i> Home</a></li>
+                    {{-- <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
                 </ul>
 
                 <div class="col-3 mx-auto">
                     <form class="mb-3 mb-lg-0 input-group" role="search">
-                        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-                            aria-label="Search">
-                            <button type="submit" class="btn btn-warning"><i class="bi bi-search"></i></button>
+                        <input type="search" class="form-control form-control-dark text-bg-dark"
+                            placeholder="Search..." aria-label="Search">
+                        <button type="submit" class="btn btn-warning"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
 
@@ -40,7 +42,8 @@
                     <ul class="nav mb-2 mb-md-0">
                         <li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-white">Login</a></li>
                         <li class="nav-item"><a href="{{ route('register') }}" class="nav-link text-white">Sign-up</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-white"><i class="bi bi-cart"></i> Cart</a></li>
+                        <li class="nav-item"><a href="" class="nav-link text-white"><i class="bi bi-cart"></i>
+                                Cart</a></li>
                     </ul>
                 @endguest
                 @auth
@@ -53,8 +56,22 @@
         </div>
     </header>
 
-    @section('content')
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary p-0">
+        <div class="container mx-auto">
+            <div class="row">
+                <div class="col mx-auto">
+                    <ul class="navbar-nav gap-5">
+                        @foreach ($categories as $item)
+                            <li class="nav-item"><a href="{{route('category',$item->id)}}" class="nav-link text-dark fw-bold"><i
+                                        class="bi bi-phone"></i> {{ $item->category_name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 
+    @section('content')
     @show
 
     <!-- JavaScript Bundle with Popper -->
