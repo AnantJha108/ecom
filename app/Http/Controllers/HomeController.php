@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -15,7 +16,7 @@ class HomeController extends Controller
     {
         $data['categories'] = Category::all();
         $data['products'] = Product::paginate(30);
-        return view("user.home",$data);
+        return view("user.home", $data);
     }
 
     public function login(Request $req)
@@ -41,7 +42,7 @@ class HomeController extends Controller
                 'password' => 'required',
             ]);
             $data['password'] = Hash::make($req->password);
-            
+
             User::create($data);
             return redirect()->route("login")->with('msg1', 'User created successfully.');
         }
@@ -73,8 +74,25 @@ class HomeController extends Controller
         return redirect()->route("admin.login");
     }
 
-    public function category($cat_id){
-        $data['products'] = Product::where('category_id',$cat_id)->paginate(6);
-        return redirect()->route('homepage',$data);
+    public function category($cat_id)
+    {
+        $data['categories'] = Category::all();
+        $data['products'] = Product::where('category_id', $cat_id)->paginate(12);
+        return view('user.home', $data);
+    }
+
+    public function search(Request $request)
+    {
+        $data['products'] = Product::where('prod_name','LIKE','%' . $request->search . '%')->paginate(12);
+        $data['categories'] = Category::all();
+        return view("user.home", $data);
+    }
+
+    public function viewProduct($id){
+        $data['categories'] = Category::all();
+        $data['products'] = Product::find($id);
+        $carts = Cart::where([['product_id',$id], ['user_id', auth()->id()]])->exists();
+        $data['exists'] = $carts;
+        return view('user.viewProduct',$data);
     }
 }

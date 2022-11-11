@@ -31,8 +31,8 @@
                 </ul>
 
                 <div class="col-3 mx-auto">
-                    <form class="mb-3 mb-lg-0 input-group" role="search">
-                        <input type="search" class="form-control form-control-dark text-bg-dark"
+                    <form class="mb-3 mb-lg-0 input-group" action="{{route('search')}}" method="GET" role="search">
+                        <input type="search" name="search" class="form-control form-control-dark text-bg-dark"
                             placeholder="Search..." aria-label="Search">
                         <button type="submit" class="btn btn-warning"><i class="bi bi-search"></i></button>
                     </form>
@@ -55,21 +55,6 @@
             </div>
         </div>
     </header>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary p-0">
-        <div class="container mx-auto">
-            <div class="row">
-                <div class="col mx-auto">
-                    <ul class="navbar-nav gap-5">
-                        @foreach ($categories as $item)
-                            <li class="nav-item"><a href="{{route('category',$item->id)}}" class="nav-link text-dark fw-bold"><i
-                                        class="bi bi-phone"></i> {{ $item->category_name }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     @section('content')
     @show
